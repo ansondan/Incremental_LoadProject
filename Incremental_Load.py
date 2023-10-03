@@ -23,6 +23,6 @@ print(df.show())
 df = df.withColumnRenamed("type", "transaction_type")
 
 # Create Hive Internal table
-df.write.mode('append').format("parquet").saveAsTable("ansong.fraud_data")
+df.write.mode('append').format("hive").saveAsTable("ansong.fraud_data")
 
 spark.stop()
