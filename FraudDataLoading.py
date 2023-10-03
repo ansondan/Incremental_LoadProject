@@ -20,6 +20,6 @@ df.show()
 
 df = df.withColumnRenamed("type", "transaction_type")
 
-df.write.mode('overwrite').format("hive").saveAsTable("ansong.fraudtable")
+df.write.mode('overwrite').format("hive").saveAsTable("ansong.fraudtable_incremental")
 
 spark.stop()
