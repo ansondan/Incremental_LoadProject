@@ -9,11 +9,12 @@ spark = SparkSession \
 
 dburl="jdbc:postgresql://ec2-3-9-191-104.eu-west-2.compute.amazonaws.com:5432/testdb"
 
-max = spark.sql("select max(row_id) from ansong.fraud_data as max")
+max = spark.sql("select max(row_id) from ansong.fraud_data2 as max")
 
 max = max.first()['max(row_id)']
-
-query="(select * from frauddetection_fullsample where row_id >"+str(max)+ ") as tb"
+max += 1
+endmax = max + 10000
+query="(select * from frauddetection where row_id between "+str(max)+" and "+str(endmax)+") as tb"
 df = spark.read.format("jdbc").option("url",dburl) \
     .option("driver", "org.postgresql.Driver").option("dbtable", query) \
     .option("user", "consultants").option("password", "WelcomeItc@2022").load()
