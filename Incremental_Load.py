@@ -13,7 +13,7 @@ max = spark.sql("select max(row_id) from fraud_project_demo.fraud_full_load_demo
 
 max = max.first()['max(row_id)']
 
-query="(select * from fraudtable where row_id > "+str(max)+ ")"
+query="(select * from fraudtable where row_id > "+str(max)+ ") as tb"
 df = spark.read.format("jdbc").option("url",dburl) \
     .option("driver", "org.postgresql.Driver").option("dbtable", query) \
     .option("user", "consultants").option("password", "WelcomeItc@2022").load()
